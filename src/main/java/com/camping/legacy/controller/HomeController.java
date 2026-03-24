@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 
@@ -20,6 +21,12 @@ public class HomeController {
     private final CampsiteService campsiteService;
     private final ReservationService reservationService;
     
+    @GetMapping("/health")
+    @ResponseBody
+    public String health() {
+        return "OK";
+    }
+
     @GetMapping("/")
     public String home() {
         return "index";

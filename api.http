@@ -1,0 +1,61 @@
+@baseUrl = http://localhost:8080
+@reservationId = 1
+@siteNumber = A01
+@date = 2024-05-12
+@startDate = 2024-05-12
+@endDate = 2024-05-14
+@guestName = Alex Kim
+@phone = 01012345678
+@keyword = Alex
+@year = 2024
+@month = 5
+
+### Create reservation
+POST {{baseUrl}}/reservations
+Content-Type: application/json
+
+{
+  "startDate": "{{startDate}}",
+  "endDate": "{{endDate}}",
+  "guestName": "{{guestName}}",
+  "phone": "{{phone}}",
+  "siteNumber": "{{siteNumber}}"
+}
+
+### Get reservation by ID
+GET {{baseUrl}}/reservations/{{reservationId}}
+
+### Search reservations by date
+GET {{baseUrl}}/reservations?date={{date}}
+
+### Search reservations by guest name
+GET {{baseUrl}}/reservations?guestName={{guestName}}
+
+### Search my reservations (name + phone)
+GET {{baseUrl}}/reservations?guestName={{guestName}}&phone={{phone}}
+
+### Keyword search (name or phone)
+GET {{baseUrl}}/reservations/search?keyword={{keyword}}
+
+### Cancel reservation
+POST {{baseUrl}}/reservations/{{reservationId}}/cancel
+Content-Type: application/json
+
+{
+  "confirmationCode": "A1B2C3"
+}
+
+### List all sites
+GET {{baseUrl}}/sites
+
+### Get site detail
+GET {{baseUrl}}/sites/{{siteNumber}}
+
+### Available sites for a single date
+GET {{baseUrl}}/availability?date={{date}}&size=large
+
+### Available sites for a date range
+GET {{baseUrl}}/availability/range?startDate={{startDate}}&endDate={{endDate}}&size=small
+
+### Monthly reservation status for a site
+GET {{baseUrl}}/calendar/sites/{{siteNumber}}?year={{year}}&month={{month}}
